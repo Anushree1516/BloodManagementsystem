@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search Blood | Blood Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* BACKGROUND */
+body{
+    min-height:100vh;
+    background:
+        linear-gradient(rgba(120,0,0,.7), rgba(80,0,0,.9)),
+        url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+    background-size:cover;
+    background-position:center;
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,.4);
+}
+
+header h1{
+    font-size:22px;
+}
+
+header a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    max-width:600px;
+    margin:auto;
+    font-size:16px;
+    opacity:.9;
+}
+
+/* AMBULANCE */
+.ambulance{
+    font-size:40px;
+    margin-top:20px;
+    animation: drive 3s linear infinite;
+}
+
+@keyframes drive{
+    0%{transform:translateX(-100px);}
+    100%{transform:translateX(100px);}
+}
+
+/* SEARCH BOX */
+.search-box{
+    max-width:400px;
+    margin:30px auto;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:15px;
+}
+
+.search-box select, button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.search-box button{
+    background:#ff2e2e;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.search-box button:hover{
+    transform:scale(1.05);
+}
+
+/* LOADER */
+.loader{
+    display:none;
+    text-align:center;
+    font-size:18px;
+    margin-top:15px;
+}
+
+/* RESULTS */
+.results{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 30px rgba(0,0,0,.4);
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#ffdede;
+}
+
+/* INFO SECTIONS */
+.section{
+    padding:40px 20px;
+    background:rgba(0,0,0,.4);
+}
+
+.section h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.info{
+    background:rgba(255,255,255,.15);
+    padding:20px;
+    border-radius:15px;
+}
+
+.info h4{
+    margin-bottom:8px;
+    color:#ffb3b3;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🩸 Blood Bank</h1>
+    <a href="index.html">Home</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+    <h2>Find Blood. Save Life.</h2>
+    <p>Every second matters in emergency. Search available blood near hospitals instantly.</p>
+    <div class="ambulance">🚑</div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+    <select id="group">
+        <option value="">Select Blood Group</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>O+</option><option>O-</option>
+        <option>AB+</option><option>AB-</option>
+    </select>
+    <button onclick="search()">Search Blood</button>
+    <div class="loader" id="loader">🔄 Searching hospitals...</div>
+</div>
+
+<!-- RESULTS -->
+<div class="results" id="results"></div>
+
+<!-- ADVANTAGES -->
+<div class="section">
+    <h2>Why Blood Donation Matters ❤️</h2>
+    <div class="info-grid">
+        <div class="info">
+            <h4>🫀 Saves Lives</h4>
+            <p>One unit of blood can save up to three lives.</p>
+        </div>
+        <div class="info">
+            <h4>💪 Improves Health</h4>
+            <p>Regular donation reduces iron overload.</p>
+        </div>
+        <div class="info">
+            <h4>🏥 Emergency Ready</h4>
+            <p>Blood is critical for accidents & surgeries.</p>
+        </div>
+        <div class="info">
+            <h4>❤️ Social Responsibility</h4>
+            <p>Donating blood is a noble humanitarian act.</p>
+        </div>
+    </div>
+</div>
+
+<!-- BLOOD TYPES -->
+<div class="section">
+    <h2>Blood Groups Explained 🩸</h2>
+    <div class="info-grid">
+        <div class="info"><h4>O+</h4><p>Most common blood type.</p></div>
+        <div class="info"><h4>O-</h4><p>Universal donor.</p></div>
+        <div class="info"><h4>AB+</h4><p>Universal recipient.</p></div>
+        <div class="info"><h4>A & B</h4><p>Compatible with specific groups.</p></div>
+    </div>
+</div>
+
+<script>
+function search(){
+    const group = document.getElementById("group").value;
+    if(!group){
+        alert("Please select blood group");
+        return;
+    }
+
+    document.getElementById("loader").style.display="block";
+    document.getElementById("results").innerHTML="";
+
+    fetch(`http://localhost:8080/api/blood/search/${group}`)
+    .then(res=>res.json())
+    .then(data=>{
+        document.getElementById("loader").style.display="none";
+
+        if(data.length===0){
+            document.getElementById("results").innerHTML =
+                "<p style='grid-column:1/-1;text-align:center;'>No blood available 😔</p>";
+            return;
+        }
+
+        data.forEach(b=>{
+            document.getElementById("results").innerHTML += `
+                <div class="card">
+                    <h3>${b.bloodGroup}</h3>
+                    <p><b>Hospital:</b> ${b.hospitalName}</p>
+                    <p><b>Location:</b> ${b.location}</p>
+                    <p><b>Units:</b> ${b.units}</p>
+                    <p><b>Contact:</b> ${b.contact}</p>
+                </div>
+            `;
+        });
+    })
+    .catch(()=>{
+        document.getElementById("loader").style.display="none";
+        alert("Server error");
+    });
+}
+</script>
+
+</body>
+</html>

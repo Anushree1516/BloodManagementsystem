@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+body {
+  background: url('https://images.unsplash.com/photo-1600959907703-125ba1374a12');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  background: rgba(255,255,255,.9);
+  padding: 40px;
+  border-radius: 15px;
+  width: 320px;
+}
+
+h2 { text-align: center; color: darkred; }
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: darkred;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+  <h2>Hospital Login</h2>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="loginUser()">Login</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

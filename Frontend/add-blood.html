@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Blood</title>
+<style>
+body {
+  background: linear-gradient(#b30000,#ff4b4b);
+  font-family: Arial;
+  color: white;
+  text-align: center;
+}
+
+.form {
+  background: white;
+  color: black;
+  padding: 30px;
+  margin: 50px auto;
+  width: 350px;
+  border-radius: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+button {
+  background: red;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+}
+
+.quote {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity: 1;}
+  50% {opacity: .6;}
+}
+</style>
+</head>
+
+<body>
+<h2 class="quote">"Your blood can save a life today"</h2>
+
+<div class="form">
+  <input id="group" placeholder="Blood Group">
+  <input id="units" placeholder="Units">
+  <input id="hospital" placeholder="Hospital Name">
+  <input id="location" placeholder="Location">
+  <input id="contact" placeholder="Contact">
+  <button onclick="addBlood()">Add</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
