@@ -1,12 +1,7 @@
-// ================================
-// BASE URL (Spring Boot Backend)
-// ================================
+
 const BASE_URL = "http://localhost:8080/api";
 
-// ================================
-// REGISTER USER
-// POST /api/auth/register
-// ================================
+
 function registerUser() {
   const data = {
     name: document.getElementById("name").value,
@@ -29,10 +24,7 @@ function registerUser() {
 }
 
 
-// ================================
-// LOGIN USER
-// POST /api/auth/login
-// ================================
+
 function loginUser() {
   const data = {
     email: document.getElementById("email").value,
@@ -53,10 +45,7 @@ function loginUser() {
 }
 
 
-// ================================
-// ADD BLOOD (Hospital Only)
-// POST /api/blood/add/{hospitalId}
-// ================================
+
 function addBlood() {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -84,10 +73,7 @@ function addBlood() {
 }
 
 
-// ================================
-// SEARCH BLOOD (Anyone)
-// GET /api/blood/search/{group}
-// ================================
+
 function searchBlood(){
   const group = document.getElementById("group").value;
   fetch(`http://localhost:8080/api/blood/search/${group}`)
@@ -121,10 +107,7 @@ function searchBlood(){
 }
 
 
-// ================================
-// DELETE BLOOD (Hospital Only)
-// DELETE /api/blood/delete/{hospitalId}/{stockId}
-// ================================
+
 function deleteBlood(id){
   if(!confirm("Delete this blood stock?")) return;
 
